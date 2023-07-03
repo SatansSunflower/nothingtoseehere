@@ -2,7 +2,7 @@
 
 require_once("db.php");
 
-function fetchOne($table_name, $row_id)
+function fetch_one_row($table_name, $row_id)
 {
     global $conn;
     $sql = "SELECT id, firstname, lastname FROM {$table_name} WHERE id = ?";
@@ -23,7 +23,7 @@ function fetchOne($table_name, $row_id)
     }
 }
 
-function insertIntoTable($table_name, $value_column1, $value_column2, $value_column3)
+function insert_into_table($table_name, $value_column1, $value_column2, $value_column3)
 {
     global $conn;
     $stmt = $conn->prepare("INSERT INTO" . $table_name . "(firstname, lastname, email) VALUES (?, ?, ?)");
@@ -38,7 +38,7 @@ function insertIntoTable($table_name, $value_column1, $value_column2, $value_col
     echo "New rows created successfully.";
 }
 
-function filterAllData($table_name, $filter, $column_to_filter)
+function filter_all_data($table_name, $filter, $column_to_filter)
 {
     global $conn;
     $sql = "SELECT * FROM {$table_name} WHERE {$column_to_filter} = ?";
@@ -58,7 +58,7 @@ function filterAllData($table_name, $filter, $column_to_filter)
     }
 }
 
-function updateDataById($table_name, $column_to_update, $new_value, $row_id)
+function update_data_by_id($table_name, $column_to_update, $new_value, $row_id)
 {
     global $conn;
     $sql = "UPDATE {$table_name} SET {$column_to_update} = ? WHERE id = ?";
@@ -75,7 +75,7 @@ function updateDataById($table_name, $column_to_update, $new_value, $row_id)
     }
 }
 
-function fetchCertainDataRows($table_name, $amount_of_rows, $start_row = 0)
+function fetch_certain_data_rows($table_name, $amount_of_rows, $start_row = 0)
 {
     global $conn;
 
@@ -98,7 +98,7 @@ function fetchCertainDataRows($table_name, $amount_of_rows, $start_row = 0)
     }
 }
 
-function deleteRowFromTable($table_name, $row_id)
+function delete_row_from_table($table_name, $row_id)
 {
     global $conn;
     $sql = "DELETE FROM {$table_name} WHERE id = ?";
@@ -113,7 +113,7 @@ function deleteRowFromTable($table_name, $row_id)
     }
 }
 
-function searchDataByInput($table_name, $search_input, $column_to_search) {
+function search_data_by_input($table_name, $search_input, $column_to_search) {
     global $conn; 
 
     $sql = "SELECT * FROM {$table_name} WHERE {$column_to_search} LIKE ? ORDER BY {$column_to_search} ASC";
