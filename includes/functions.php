@@ -33,3 +33,19 @@ function insertIntoTable($table_name, $value_column1, $value_column2, $value_col
 
     echo "New rows created successfully.";
 }
+
+function filterAllData($table_name, $filter, $column_to_filter)
+{
+    global $conn;
+    $sql = "SELECT * FROM {$table_name} WHERE {$column_to_filter} = {$filter}";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // TODO: display the filtered data in table form
+        while ($row = $result->fetch_assoc()) {
+            echo "id: " . $row["id"] . " - Name: " . $row["firstname"] . " " . $row["lastname"] . "<br>";
+        }
+    } else {
+        echo "No results found for this query.";
+    }
+}
