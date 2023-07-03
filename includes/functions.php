@@ -49,3 +49,33 @@ function filterAllData($table_name, $filter, $column_to_filter)
         echo "No results found for this query.";
     }
 }
+
+function updateDataById($table_name, $column_to_update, $new_value, $row_id)
+{
+    global $conn;
+    $sql = "UPDATE {$table_name} SET {$column_to_update} = {$new_value} WHERE id = {$row_id}";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Record updated successfully.";
+        // TODO: display this to the user in some way... 
+    } else {
+        echo "Error updating record: " . $conn->error;
+    }
+}
+
+function fetchCertainDataRows($table_name, $amount_of_rows, $start_row = 0) {
+    global $conn; 
+    
+    $sql = "SELECT * FROM {$table_name} LIMIT {$amount_of_rows} OFFSET {$start_row}";
+    
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // TODO: display the filtered data in table form
+        while ($row = $result->fetch_assoc()) {
+            echo "id: " . $row["id"] . " - Name: " . $row["firstname"] . " " . $row["lastname"] . "<br>";
+        }
+    } else {
+        echo "No results found for this query.";
+    }
+}
