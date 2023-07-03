@@ -92,3 +92,21 @@ function deleteRowFromTable($table_name, $row_id)
         echo "Error deleting record: " . $conn->error;
     }
 }
+
+function searchDataByInput($table_name, $search_input, $column_to_search) {
+    global $conn; 
+
+    $sql = "SELECT * FROM {$table_name} WHERE {$column_to_search} LIKE '%{$search_input}%' ORDER BY {$column_to_search} ASC";
+
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            // TODO: display rows in table form here
+            echo "id: " . $row["id"] . " - Name: " . $row["firstname"] . " " . $row["lastname"] . "<br>";
+        }
+    } else {
+        echo "No results found for this query.";
+    }
+}
