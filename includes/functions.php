@@ -63,11 +63,12 @@ function updateDataById($table_name, $column_to_update, $new_value, $row_id)
     }
 }
 
-function fetchCertainDataRows($table_name, $amount_of_rows, $start_row = 0) {
-    global $conn; 
-    
+function fetchCertainDataRows($table_name, $amount_of_rows, $start_row = 0)
+{
+    global $conn;
+
     $sql = "SELECT * FROM {$table_name} LIMIT {$amount_of_rows} OFFSET {$start_row}";
-    
+
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -77,5 +78,17 @@ function fetchCertainDataRows($table_name, $amount_of_rows, $start_row = 0) {
         }
     } else {
         echo "No results found for this query.";
+    }
+}
+
+function deleteRowFromTable($table_name, $row_id)
+{
+    global $conn;
+    $sql = "DELETE FROM {$table_name} WHERE id = {$row_id}";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Record deleted successfully.";
+    } else {
+        echo "Error deleting record: " . $conn->error;
     }
 }
