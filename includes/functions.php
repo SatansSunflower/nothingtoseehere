@@ -2,11 +2,15 @@
 
 require_once("db.php");
 
-function fetchOne($table_name)
+function fetchOne($table_name, $row_id)
 {
     global $conn;
-    $sql = "SELECT id, firstname, lastname FROM" . $table_name;
-    $result = $conn->query($sql);
+    $sql = "SELECT id, firstname, lastname FROM {$table_name} WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $row_id);
+    $stmt->execute();
+    
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         // output data of each row
@@ -37,8 +41,12 @@ function insertIntoTable($table_name, $value_column1, $value_column2, $value_col
 function filterAllData($table_name, $filter, $column_to_filter)
 {
     global $conn;
-    $sql = "SELECT * FROM {$table_name} WHERE {$column_to_filter} = {$filter}";
-    $result = $conn->query($sql);
+    $sql = "SELECT * FROM {$table_name} WHERE {$column_to_filter} = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $filter);
+    $stmt->execute();
+    
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         // TODO: display the filtered data in table form
@@ -53,9 +61,13 @@ function filterAllData($table_name, $filter, $column_to_filter)
 function updateDataById($table_name, $column_to_update, $new_value, $row_id)
 {
     global $conn;
-    $sql = "UPDATE {$table_name} SET {$column_to_update} = {$new_value} WHERE id = {$row_id}";
+    $sql = "UPDATE {$table_name} SET {$column_to_update} = ? WHERE id = ?";
 
-    if ($conn->query($sql) === TRUE) {
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $new_value);
+    $stmt->bind_param("i", $row_id);
+
+    if ($stmt->execute() === TRUE) {
         echo "Record updated successfully.";
         // TODO: display this to the user in some way... 
     } else {
@@ -67,9 +79,14 @@ function fetchCertainDataRows($table_name, $amount_of_rows, $start_row = 0)
 {
     global $conn;
 
-    $sql = "SELECT * FROM {$table_name} LIMIT {$amount_of_rows} OFFSET {$start_row}";
+    $sql = "SELECT * FROM {$table_name} LIMIT ? OFFSET ?";
 
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $amount_of_rows);
+    $stmt->bind_param("i", $start_row);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         // TODO: display the filtered data in table form
@@ -84,9 +101,12 @@ function fetchCertainDataRows($table_name, $amount_of_rows, $start_row = 0)
 function deleteRowFromTable($table_name, $row_id)
 {
     global $conn;
-    $sql = "DELETE FROM {$table_name} WHERE id = {$row_id}";
+    $sql = "DELETE FROM {$table_name} WHERE id = ?";
 
-    if ($conn->query($sql) === TRUE) {
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $row_id);
+
+    if ($stmt->execute() === TRUE) {
         echo "Record deleted successfully.";
     } else {
         echo "Error deleting record: " . $conn->error;
@@ -96,9 +116,14 @@ function deleteRowFromTable($table_name, $row_id)
 function searchDataByInput($table_name, $search_input, $column_to_search) {
     global $conn; 
 
-    $sql = "SELECT * FROM {$table_name} WHERE {$column_to_search} LIKE '%{$search_input}%' ORDER BY {$column_to_search} ASC";
+    $sql = "SELECT * FROM {$table_name} WHERE {$column_to_search} LIKE ? ORDER BY {$column_to_search} ASC";
+    $search = "%{$search_input}%";
 
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $search);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         // output data of each row
