@@ -9,7 +9,7 @@
 
 <body>
 
-    <form action="form.php">
+    <form action="form-view.php" method="POST">
 
         <input type="text" id="firstname" name="firstname">
         <input type="text" id="lastname" name="lastname">
