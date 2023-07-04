@@ -9,18 +9,10 @@ function fetch_one_row($table_name, $row_id)
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $row_id);
     $stmt->execute();
-    
+
     $result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
-        // output data of each row
-        while ($row = $result->fetch_assoc()) {
-            // TODO: display rows in table form here
-            echo "id: " . $row["id"] . " - Name: " . $row["firstname"] . " " . $row["lastname"] . "<br>";
-        }
-    } else {
-        echo "No results found for this query.";
-    }
+    render_table($result);
 }
 
 function insert_into_table($table_name, $value_column1, $value_column2, $value_column3)
@@ -45,17 +37,10 @@ function filter_all_data($table_name, $filter, $column_to_filter)
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $filter);
     $stmt->execute();
-    
+
     $result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
-        // TODO: display the filtered data in table form
-        while ($row = $result->fetch_assoc()) {
-            echo "id: " . $row["id"] . " - Name: " . $row["firstname"] . " " . $row["lastname"] . "<br>";
-        }
-    } else {
-        echo "No results found for this query.";
-    }
+    render_table($result);
 }
 
 function update_data_by_id($table_name, $column_to_update, $new_value, $row_id)
@@ -88,14 +73,7 @@ function fetch_certain_data_rows($table_name, $amount_of_rows, $start_row = 0)
 
     $result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
-        // TODO: display the filtered data in table form
-        while ($row = $result->fetch_assoc()) {
-            echo "id: " . $row["id"] . " - Name: " . $row["firstname"] . " " . $row["lastname"] . "<br>";
-        }
-    } else {
-        echo "No results found for this query.";
-    }
+    render_table($result);
 }
 
 function delete_row_from_table($table_name, $row_id)
@@ -113,8 +91,9 @@ function delete_row_from_table($table_name, $row_id)
     }
 }
 
-function search_data_by_input($table_name, $search_input, $column_to_search) {
-    global $conn; 
+function search_data_by_input($table_name, $search_input, $column_to_search)
+{
+    global $conn;
 
     $sql = "SELECT * FROM {$table_name} WHERE {$column_to_search} LIKE ? ORDER BY {$column_to_search} ASC";
     $search = "%{$search_input}%";
@@ -125,12 +104,29 @@ function search_data_by_input($table_name, $search_input, $column_to_search) {
 
     $result = $stmt->get_result();
 
+    render_table($result);
+}
+
+function render_table($result)
+{
     if ($result->num_rows > 0) {
-        // output data of each row
+        echo '<table class="striped">
+            <tr class="header">
+                <td>Id</td>
+                <td>Name</td>
+                <td>Title</td>
+            </tr>';
+
         while ($row = $result->fetch_assoc()) {
-            // TODO: display rows in table form here
-            echo "id: " . $row["id"] . " - Name: " . $row["firstname"] . " " . $row["lastname"] . "<br>";
+            echo "<tr>";
+            echo "<td>" . $row["ID"] . "</td>";
+            echo "<td>" . $row["Name"] . "</td>";
+            echo "<td>" . $row["Title"] . "</td>";
+            echo "</tr>";
         }
+
+
+        echo "</table>";
     } else {
         echo "No results found for this query.";
     }
