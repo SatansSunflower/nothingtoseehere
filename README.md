@@ -3,12 +3,12 @@ Empty Repository I swear
 
 # TODOS: 
 
-* search bar
+* <span style="color:green">search bar</span>
 * filters (number filters and such)
 * comments 
 * docs for installation and usage of the repo + things to not forget
 * refactoring
-* form which call certain functions 
+* <span style="color:green">form which call certain functions </span>
 * "shop" site 
 * bootstrap design
 * quicklinks 
