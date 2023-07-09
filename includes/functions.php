@@ -29,13 +29,13 @@ function get_all_data_from_table($table_name) {
 function insert_into_table($table_name, $value_column1, $value_column2, $value_column3)
 {
     global $conn;
-    $stmt = $conn->prepare("INSERT INTO" . $table_name . "(firstname, lastname, email) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $value_column1, $value_column2, $value_column3);
+    $stmt = $conn->prepare("INSERT INTO " . $table_name . " (firstname, lastname, email) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $v1, $v2, $v3);
 
     // set parameters and execute
-    $value_column1 = "John";
-    $value_column2 = "Doe";
-    $value_column3 = "john@example.com";
+    $v1 = $value_column1;
+	$v2 = $value_column2;
+	$v3 = $value_column3;
     $stmt->execute();
 
     echo "New rows created successfully.";
