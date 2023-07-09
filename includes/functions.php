@@ -15,6 +15,17 @@ function fetch_one_row($table_name, $row_id)
     render_table($result);
 }
 
+function get_all_data_from_table($table_name) {
+    global $conn;
+    $sql = "SELECT * FROM {$table_name}";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+
+    render_table($result);
+}
+
 function insert_into_table($table_name, $value_column1, $value_column2, $value_column3)
 {
     global $conn;
@@ -112,16 +123,16 @@ function render_table($result)
     if ($result->num_rows > 0) {
         echo '<table class="striped">
             <tr class="header">
-                <td>Id</td>
-                <td>Name</td>
-                <td>Title</td>
+                <td>Firstname</td>
+                <td>Lastname</td>
+                <td>Email</td>
             </tr>';
 
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
-            echo "<td>" . $row["ID"] . "</td>";
-            echo "<td>" . $row["Name"] . "</td>";
-            echo "<td>" . $row["Title"] . "</td>";
+            echo "<td>" . $row["firstname"] . "</td>";
+            echo "<td>" . $row["lastname"] . "</td>";
+            echo "<td>" . $row["email"] . "</td>";
             echo "</tr>";
         }
 
