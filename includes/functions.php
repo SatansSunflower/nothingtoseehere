@@ -102,11 +102,11 @@ function delete_row_from_table($table_name, $row_id)
     }
 }
 
-function search_data_by_input($table_name, $search_input, $column_to_search)
+function search_data_by_input($table_name, $search_input)
 {
     global $conn;
 
-    $sql = "SELECT * FROM {$table_name} WHERE {$column_to_search} LIKE ? ORDER BY {$column_to_search} ASC";
+    $sql = "SELECT * FROM {$table_name} WHERE CONCAT(firstname,lastname,email) LIKE ?";
     $search = "%{$search_input}%";
 
     $stmt = $conn->prepare($sql);
@@ -121,15 +121,17 @@ function search_data_by_input($table_name, $search_input, $column_to_search)
 function render_table($result)
 {
     if ($result->num_rows > 0) {
-        echo '<table class="striped">
+        echo '<table class="table">
+		<thead class="table-success">
             <tr class="header">
-                <td>Firstname</td>
-                <td>Lastname</td>
-                <td>Email</td>
-            </tr>';
+                <th scope="col">Firstname</th>
+                <th scope="col">Lastname</th>
+                <th scope="col">Email</th>
+            </tr>
+			</thead><tbody class="table-group-divider">';
 
         while ($row = $result->fetch_assoc()) {
-            echo "<tr>";
+            echo '<tr scope="row">';
             echo "<td>" . $row["firstname"] . "</td>";
             echo "<td>" . $row["lastname"] . "</td>";
             echo "<td>" . $row["email"] . "</td>";
@@ -137,7 +139,7 @@ function render_table($result)
         }
 
 
-        echo "</table>";
+        echo "</tbody></table>";
     } else {
         echo "No results found for this query.";
     }

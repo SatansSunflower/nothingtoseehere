@@ -1,9 +1,9 @@
 <?php
 
 define ( 'DB_HOST', 'localhost' );
-define ( 'DB_USER', 'insert_username_here' );
-define ( 'DB_PASSWORD', 'insert_secret_password_here' );
-define ( 'DB_NAME', 'insert_database_name_here' );
+define ( 'DB_USER', 'root' );
+define ( 'DB_PASSWORD', '' );
+define ( 'DB_NAME', 'lap_php_test' );
 
 
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
