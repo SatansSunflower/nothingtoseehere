@@ -3,7 +3,7 @@
 define ( 'DB_HOST', 'localhost' );
 define ( 'DB_USER', 'root' );
 define ( 'DB_PASSWORD', '' );
-define ( 'DB_NAME', 'lap_php_test' );
+define ( 'DB_NAME', 'php_lap_test' );
 
 
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
