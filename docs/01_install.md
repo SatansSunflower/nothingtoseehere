@@ -6,8 +6,6 @@ This docu is written as an installation guide / structure for following tools:
 * MySQL Workbench (+ Visual C++ download potentially)
 * Visual Studio Code 
 
-**This page is currently in edit**
-
 # Install XAMPP 
 
 **Step 1:** Check if XAMPP is already installed (Search bar + look inside C:/) 
@@ -43,7 +41,7 @@ This is the most important step! :P
 
 [Download link for User Installer](https://code.visualstudio.com/download#)
 
-Or [direkt install link](https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user)
+Or [direct install link](https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user)
 
 ## Marketplace necessities
 

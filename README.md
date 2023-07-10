@@ -4,7 +4,7 @@ Empty Repository I swear
 # TODOS: 
 
 * <span style="color:green">search bar</span>
-* filters (number filters and such)
+* <span style="color:green">filters (number filters and such)</span>
 * comments 
 * docs for installation and usage of the repo + things to not forget
 * refactoring
