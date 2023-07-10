@@ -82,7 +82,7 @@ function insert_into_table($table_name, $value_column1, $value_column2, $value_c
  * Once created the function calls another one, which renders all filtered data inside a table. 
  * 
  * @param string $table_name The name of the table you want to query.
- * @param string $filter The value with which to filter.
+ * @param int $filter The value with which to filter.
  * @param string $column_to_filter The column which should be filtered.
  * 
  * @see render_table()
@@ -101,7 +101,17 @@ function filter_all_data($table_name, $filter, $column_to_filter)
     render_table($result);
 }
 
-// TODO:
+/**
+ * This function updates the row with the provided id.
+ * Once created the function calls another one, which returns the updated row. 
+ * 
+ * @param string $table_name The name of the table you want to query.
+ * @param string $column_to_update The column which should be updated.
+ * @param string $new_value The new value of the column.
+ * @param int $row_id The id of the record you want to update. 
+ * 
+ * @see fetch_one_row()
+ */
 function update_data_by_id($table_name, $column_to_update, $new_value, $row_id)
 {
     global $conn;
@@ -115,15 +125,23 @@ function update_data_by_id($table_name, $column_to_update, $new_value, $row_id)
     $id = $row_id;
 
     if ($stmt->execute() === TRUE) {
-        echo "Record updated successfully.";
         fetch_one_row($table_name, $row_id);
     } else {
         echo "Error updating record: " . $conn->error;
     }
 }
 
-// TODO:
-function fetch_certain_data_rows($table_name, $amount_of_rows, $start_row = 0)
+/**
+ * This function returns rows starting at a certain id and is limited to the amount of rows you provide.
+ * You can start at the first row and get the first 20 entries for example.
+ * 
+ * @param string $table_name The name of the table you want to query.
+ * @param int $amount_of_rows The amount of rows you want returned
+ * @param int $start_row The id of the first row. default = 1
+ * 
+ * @see render_table()
+ */
+function fetch_certain_data_rows($table_name, $amount_of_rows, $start_row = 1)
 {
     global $conn;
 
@@ -139,7 +157,13 @@ function fetch_certain_data_rows($table_name, $amount_of_rows, $start_row = 0)
     render_table($result);
 }
 
-// TODO:
+// TODO: test this
+/**
+ * This function deletes a certain row.
+ * 
+ * @param string $table_name The name of the table you want to query.
+ * @param int $row_id The id of the row you want to delete
+ */
 function delete_row_from_table($table_name, $row_id)
 {
     global $conn;
@@ -155,7 +179,15 @@ function delete_row_from_table($table_name, $row_id)
     }
 }
 
-// TODO:
+/**
+ * This function takes a search value and filters the database with the provided information.
+ * Once created the function calls another one, which renders all filtered data inside a table. 
+ * 
+ * @param string $table_name The name of the table you want to query.
+ * @param string $search_input The value with which to search the columns.
+ * 
+ * @see render_table()
+ */
 function search_data_by_input($table_name, $search_input)
 {
     global $conn;
@@ -172,7 +204,14 @@ function search_data_by_input($table_name, $search_input)
     render_table($result);
 }
 
-// TODO:
+//TODO: create function
+function pagination($table_name, $records_per_page) {}
+
+/**
+ * This function takes an array of values and creates a table with the information.
+ * 
+ * @param object $result An array of all rows recieved from the database.
+ */
 function render_table($result)
 {
     if ($result->num_rows > 0) {
