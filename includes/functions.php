@@ -204,9 +204,6 @@ function search_data_by_input($table_name, $search_input)
     render_table($result);
 }
 
-//TODO: create function
-function pagination($table_name, $records_per_page) {}
-
 /**
  * This function takes an array of values and creates a table with the information.
  * 
