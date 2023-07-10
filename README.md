@@ -5,7 +5,7 @@ Empty Repository I swear
 
 * <span style="color:green">search bar</span>
 * <span style="color:green">filters (number filters and such)</span>
-* comments 
+* <span style="color:green">comments</span> 
 * docs for installation and usage of the repo + things to not forget
 * refactoring
 * <span style="color:green">form which call certain functions </span>
