@@ -15,17 +15,21 @@
     <div class="col-6" style="margin-left: 4%; margin-top: 4%">
         <div>
             <form action="" method="POST">
-                <input type="text" name="search" value="<?php if (isset($_POST['search'])) {
+                <div style="display: flex">
+                    <input class="form-control" style="margin-right: 2%" type="text" name="search" value="<?php if (isset($_POST['search'])) {
                                                             echo $_POST['search'];
                                                         } ?>">
-                <button type="submit">Suche</button>
+                    <button type="submit" class="btn btn-primary">Suche</button>
+                </div>
             </form>
         </div><br>
 
         <div>
             <form action="" method="POST">
-                <input type="number" name="filter">
-                <button type="submit">filtern</button>
+                <div style="display: flex;">
+                    <input type="number" name="filter" class="form-control" style="margin-right: 2%">
+                    <button type="submit" class="btn btn-primary">filtern</button>
+                </div>
             </form>
         </div><br>
 
