@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
 </head>
 
@@ -20,6 +21,14 @@
                 <button type="submit">Suche</button>
             </form>
         </div><br>
+
+        <div>
+            <form action="" method="POST">
+                <input type="number" name="filter">
+                <button type="submit">filtern</button>
+            </form>
+        </div><br>
+
         <?php
         require_once("../includes/functions.php");
 
@@ -28,14 +37,21 @@
         if (isset($_POST['search'])) {
             $filterval = $_POST['search'];
             search_data_by_input("users", $filterval);
-        } else {
+        } 
+        elseif (isset($_POST['filter'])) {
+            $filterval = $_POST['filter'];
+            filter_all_data("users", $filterval, "id");
+        }
+        else {
             get_all_data_from_table("users");
         }
         ?>
     </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
+    </script>
 
 </body>
 
