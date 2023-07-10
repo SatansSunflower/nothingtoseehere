@@ -15,7 +15,8 @@ function fetch_one_row($table_name, $row_id)
     render_table($result);
 }
 
-function get_all_data_from_table($table_name) {
+function get_all_data_from_table($table_name)
+{
     global $conn;
     $sql = "SELECT * FROM {$table_name}";
     $stmt = $conn->prepare($sql);
@@ -34,8 +35,8 @@ function insert_into_table($table_name, $value_column1, $value_column2, $value_c
 
     // set parameters and execute
     $v1 = $value_column1;
-	$v2 = $value_column2;
-	$v3 = $value_column3;
+    $v2 = $value_column2;
+    $v3 = $value_column3;
     $stmt->execute();
 
     echo "New rows created successfully.";
@@ -46,7 +47,8 @@ function filter_all_data($table_name, $filter, $column_to_filter)
     global $conn;
     $sql = "SELECT * FROM {$table_name} WHERE {$column_to_filter} = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $filter);
+    $stmt->bind_param("i", $f);
+    $f = $filter;
     $stmt->execute();
 
     $result = $stmt->get_result();
