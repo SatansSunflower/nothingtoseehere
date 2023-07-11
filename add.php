@@ -32,6 +32,29 @@
                 <input type="checkbox" class="form-check-input" id="check_id" name="check">
                 <label class="form-check-label" for="check_id">Check me out</label>
             </div>
+            <div>
+                <label>Schule</label>
+                <select name="school" class="form-select">
+                    <?php
+                    /**
+                     * This code calls the function to get the select options and iterates over each one, 
+                     * then creates an option for the select based on the return.
+                     */
+                    $schools = get_all_select_options("schools", "name");
+                    if ($schools->num_rows > 0) {
+                        
+                
+                        while ($row = $schools->fetch_assoc()) {
+                            echo 
+                            '<option value="echo $row["id"];">
+                            <echo $row["name"];>
+                            </option>';
+                        }
+                    }
+                    ?>
+                </select>
+                <br>
+            </div>
             <input type=" submit" name="submit" value="Speichern" class="btn btn-primary">
         </form>
 

@@ -47,10 +47,8 @@ function get_all_data_from_table($table_name)
 {
     global $conn;
     $sql = "SELECT * FROM {$table_name}";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
 
-    $result = $stmt->get_result();
+    $result = $conn->query($sql);
 
     render_table($result);
 }
@@ -202,6 +200,28 @@ function search_data_by_input($table_name, $search_input)
     $result = $stmt->get_result();
 
     render_table($result);
+}
+
+/**
+ * This function gets the ID and a provided column from the provided table and returns the results.
+ * The intended use is for getting values, which can be displayed in a select field.
+ * 
+ * @param string $table_name The name of the table you want to query.
+ * @param string $column The column which to get (display values for the select options).
+ * 
+ * @return object $result The id + value of each row from the provided column.
+ */
+function get_all_select_options($table_name, $column) {
+    global $conn;
+
+    $sql = "SELECT id, {$column} FROM {$table_name}"; 
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+
+    $result = $conn->query($sql);
+    
+    return $result;
 }
 
 /**
