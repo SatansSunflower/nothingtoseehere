@@ -40,6 +40,10 @@
 
     require_once("./includes/functions.php");
 
+    /**
+     * If the form is submitted, then the values will be extracted and assigned, then passed into an insert helper function.
+     * The person will then be redirected to the main page, where all entries will be displayed. 
+     */
     if (isset($_POST["submit"])) {
         $firstname = $_POST['firstname'];
         $lastname = $_POST['lastname'];

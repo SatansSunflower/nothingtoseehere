@@ -1,7 +1,12 @@
 <?php
 /**
+ * Helper functions for database 
+ * 
  * This PHP file is used for common functions in regards to the database.
  * You can find all sorts of needed functionalities for getting and manipulating data as well as displaying it. 
+ * 
+ * @author SatansAvocado
+ * @version 0.0.1
  */
 
 // This imports the db.php file, which allows us to use the variables defined there, such as the connection to the database.
@@ -53,14 +58,11 @@ function get_all_data_from_table($table_name)
 
 /**
  * This function takes values and the name of a table, then inserts the values into said table.
- * Once created the function calls another one, which gets all the data again including the newly created row. 
  * 
  * @param string $table_name The name of the table you want to query.
  * @param string $value_column1 The first value inserted into the table.
  * @param string $value_column2 The second value inserted into the table.
  * @param string $value_column3 The third value inserted into the table.
- * 
- * @see get_all_data_from_table()
  */
 function insert_into_table($table_name, $value_column1, $value_column2, $value_column3)
 {
@@ -73,8 +75,6 @@ function insert_into_table($table_name, $value_column1, $value_column2, $value_c
     $v2 = $value_column2;
     $v3 = $value_column3;
     $stmt->execute();
-
-    get_all_data_from_table($table_name);
 }
 
 /**

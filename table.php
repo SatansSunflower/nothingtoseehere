@@ -36,8 +36,16 @@
         <?php
         require_once("../includes/functions.php");
 
-
-
+/**
+ * This code determines if either one of the submit buttons have been used. 
+ * The first one will search the table using a helper function and return all results, which include the provided string.
+ * The second submit button (filter) will filter the database with the provided id, the result will then also be displayed.
+ * If neither of the buttons are clicked (default page view) the helper function will display all data.
+ * 
+ * @see search_data_by_input()
+ * @see filter_all_data()
+ * @see get_all_data_from_table()
+ */
         if (isset($_POST['search'])) {
             $filterval = $_POST['search'];
             search_data_by_input("users", $filterval);

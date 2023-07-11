@@ -1,6 +1,9 @@
 <?php
 /** 
  * This is a common-module PHP file for connecting to a MySQL database using mysqli
+ * 
+ * @author SatansAvocado
+ * @version 0.0.1
  */
 
 // These global constants define the connection information needed for the database 
