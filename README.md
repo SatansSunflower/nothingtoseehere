@@ -11,7 +11,7 @@ Empty Repository I swear
 * <span style="color:green">form which call certain functions </span>
 * "shop" site 
 * <span style="color:green">bootstrap design</span>
-* **quicklinks** 
+* ~~quicklinks~~ 
 * <span style="color:green">in repo: selects with options from DB fields</span>
 * joins&funcs short explanations 
 * little tutorial on Workbench (how to create diagrams and what the fields all mean + what not to forget like to always choose the right type & size for fields + visible immer raus)
