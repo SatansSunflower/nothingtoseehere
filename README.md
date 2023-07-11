@@ -10,9 +10,9 @@ Empty Repository I swear
 * refactoring
 * <span style="color:green">form which call certain functions </span>
 * "shop" site 
-* bootstrap design
+* <span style="color:green">bootstrap design</span>
 * quicklinks 
-* in repo: selects with options from DB fields
+* <span style="color:green">in repo: selects with options from DB fields</span>
 * joins&funcs short explanations 
 * little tutorial on Workbench (how to create diagrams and what the fields all mean + what not to forget like to always choose the right type & size for fields + visible immer raus)
 * do not forget: test szenarios machen + docu;; error handling;; db richtiger type immer;; upload docu after youre done somewhere;; structure + clean code brings points
