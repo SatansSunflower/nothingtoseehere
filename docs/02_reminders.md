@@ -16,7 +16,8 @@ This is a document listing all things, that you should not forget.
 # List (scope: code)
 
 1. copy all needed files 
-2. check if paths are correct (folder names and structure; z.B.: ./ instead of ../)
-3. only copy things you need 
-4. change the author in the comments 
-5. ??
+2. when copying the db.php file make sure to insert the correct data in the username, password and database_name fields
+3. check if paths are correct (folder names and structure; z.B.: ./ instead of ../)
+4. only copy things you need 
+5. change the author in the comments 
+6. ??
