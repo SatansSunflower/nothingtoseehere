@@ -25,3 +25,4 @@ Docs can be found here:
 * ~~little tutorial on Workbench (how to create diagrams and what the fields all mean + what not to forget like to always choose the right type & size for fields + visible immer raus)~~
 * ~~do not forget: test szenarios machen + docu;; error handling;; db richtiger type immer;; upload docu after youre done somewhere;; structure + clean code brings points~~
 * ~~error handling im code~~
+* **test everything a final time**
