@@ -26,12 +26,15 @@ function fetch_one_row($table_name, $row_id)
     global $conn;
     $sql = "SELECT id, firstname, lastname FROM {$table_name} WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $row_id);
-    $stmt->execute();
+    $stmt->bind_param("i", $id);
+    $id = $row_id;
 
-    $result = $stmt->get_result();
-
-    render_table($result);
+    if ($stmt->execute() === TRUE) {
+        $result = $stmt->get_result();
+        render_table($result);
+    } else {
+        echo "Error fetching data: " . $conn->error;
+    }
 }
 
 
@@ -72,7 +75,12 @@ function insert_into_table($table_name, $value_column1, $value_column2, $value_c
     $v1 = $value_column1;
     $v2 = $value_column2;
     $v3 = $value_column3;
-    $stmt->execute();
+
+    if ($stmt->execute() === TRUE) {
+        echo "Data was inserted successfully!"; 
+    } else {
+        echo "Error while inserting data: " . $conn->error;
+    }
 }
 
 /**
@@ -92,11 +100,13 @@ function filter_all_data($table_name, $filter, $column_to_filter)
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $f);
     $f = $filter;
-    $stmt->execute();
 
-    $result = $stmt->get_result();
-
-    render_table($result);
+    if ($stmt->execute() === TRUE) {
+        $result = $stmt->get_result();
+        render_table($result);
+    } else {
+        echo "Error fetching data: " . $conn->error;
+    }
 }
 
 /**
@@ -146,16 +156,20 @@ function fetch_certain_data_rows($table_name, $amount_of_rows, $start_row = 1)
     $sql = "SELECT * FROM {$table_name} LIMIT ? OFFSET ?";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $amount_of_rows);
-    $stmt->bind_param("i", $start_row);
-    $stmt->execute();
+    $stmt->bind_param("i", $rows_nr);
+    $stmt->bind_param("i", $start);
 
-    $result = $stmt->get_result();
-
-    render_table($result);
+    $rows_nr = $amount_of_rows;
+    $start = $start_row; 
+    
+    if ($stmt->execute() === TRUE) {
+        $result = $stmt->get_result();
+        render_table($result);
+    } else {
+        echo "Error while fetching data: " . $conn->error;
+    }
 }
 
-// TODO: test this
 /**
  * This function deletes a certain row.
  * 
@@ -168,8 +182,10 @@ function delete_row_from_table($table_name, $row_id)
     $sql = "DELETE FROM {$table_name} WHERE id = ?";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $row_id);
+    $stmt->bind_param("i", $id);
 
+    $id = $row_id; 
+    
     if ($stmt->execute() === TRUE) {
         echo "Record deleted successfully.";
     } else {
@@ -191,15 +207,17 @@ function search_data_by_input($table_name, $search_input)
     global $conn;
 
     $sql = "SELECT * FROM {$table_name} WHERE CONCAT(firstname,lastname,email) LIKE ?";
-    $search = "%{$search_input}%";
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $search);
-    $stmt->execute();
+    $search = "%{$search_input}%";
 
-    $result = $stmt->get_result();
-
-    render_table($result);
+    if ($stmt->execute() === TRUE) {
+        $result = $stmt->get_result();
+        render_table($result);
+    } else {
+        echo "Error fetching data: " . $conn->error;
+    }
 }
 
 /**
@@ -215,9 +233,6 @@ function get_all_select_options($table_name, $column) {
     global $conn;
 
     $sql = "SELECT id, {$column} FROM {$table_name}"; 
-
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
 
     $result = $conn->query($sql);
     
