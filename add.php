@@ -32,6 +32,10 @@
                 <input type="checkbox" class="form-check-input" id="check_id" name="check">
                 <label class="form-check-label" for="check_id">Check me out</label>
             </div>
+            <div class="form-check mb-3">
+                <label for="birthday">Birthday:</label>
+                <input type="date" id="birthday" name="birthday">
+            </div>
             <div>
                 <label>Schule</label>
                 <select name="school" class="form-select">

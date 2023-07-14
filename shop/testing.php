@@ -49,25 +49,7 @@
         if($row["idshop"] % 2 != 0) {
             echo '</div>';
         }
-            // echo '<div class="row">
-            // <div class="col-sm-6">
-            //   <div class="card">
-            // <img class="card-img-top" src="'.$row["image"].'" alt="'.$row["name"].'">
-            //     <div class="card-body">
-            //       <h5 class="card-title">'.$row["name"].'</h5>
-            //       <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            //       <a href="#" class="btn btn-primary">Go somewhere</a>
-            //     </div>
-            //   </div>
-            // </div>';
-        //     echo '<div class="card w-50">
-        //     <img class="card-img-top" src="'.$row["image"].'" alt="'.$row["name"].'">
-        //     <div class="card-body">
-        //       <h5 class="card-title">'.$row["name"].'</h5>
-        //       <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        //       <a href="#" class="btn btn-primary">Button</a>
-        //     </div>
-        //   </div>';
+
         }
     } else {
         echo "0 results";
